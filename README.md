@@ -58,7 +58,12 @@ npm run dev
 - Node.js
 - Express.js
 - MongoDB
+
+## Tooling
+
 - Morgan
+- ESlint
+- Prettier
 
 ## API Endpoints
 
