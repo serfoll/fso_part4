@@ -29,7 +29,12 @@ Make sure you have Node.js and npm installed. Then run:
 npm install
 ```
 
-### 4. Start the Development Server
+### 4. Set Up Environment Variables
+
+- Rename **.example.env** to **.env**
+- Update the variable values with your own configuration
+
+### 5. Start the Development Server
 
 ```bash
 npm start
