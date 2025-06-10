@@ -52,17 +52,27 @@ describe('favorite blog', () => {
 
   test('when list has multiple similar likes, equals single most liked', () => {
     const result = listHelper.favoriteBlog(testData.largeBlogList)
-    const expect = testData.largeBlogList[2]
+    const expect = testData.largeBlogList[3]
 
     assert.deepStrictEqual(result, expect)
   })
 })
 
-describe('most', () => {
+describe('author with most posts', () => {
   test('when list is empty, equals empty object', () => {
     const result = listHelper.mostBlogs([])
 
     assert.deepStrictEqual(result, {})
+  })
+
+  test('when list has single blog, equals single author ', () => {
+    const result = listHelper.mostBlogs(testData.singleBlog)
+    const expect = {
+      author: 'Michael Chan',
+      blogs: 1,
+    }
+
+    assert.deepStrictEqual(result, expect)
   })
 
   test('when list has multiple blogs, equals author with most blogs', () => {
@@ -71,6 +81,44 @@ describe('most', () => {
       author: 'Edsger W. Dijkstra',
       blogs: 2,
     }
+
+    assert.deepStrictEqual(result, expect)
+  })
+
+  test('when list has multiple blogs with same amount of posts, equals most recent author', () => {
+    const result = listHelper.mostBlogs(testData.largeBlogList)
+    const expect = { author: 'Michael Chan', blogs: 3 }
+
+    assert.deepStrictEqual(result, expect)
+  })
+})
+
+describe('author with most likes', () => {
+  test('when list is empty, equals empty object', () => {
+    const result = listHelper.mostLikes([])
+
+    assert.deepStrictEqual(result, {})
+  })
+
+  test('when list has single blog, equals single object', () => {
+    const result = listHelper.mostLikes(testData.singleBlog)
+    const expect = {
+      author: 'Michael Chan',
+      likes: 7,
+    }
+    assert.deepStrictEqual(result, expect)
+  })
+
+  test('when list has multiple blogs, equals author with most likes', () => {
+    const result = listHelper.mostLikes(testData.multipleBlogs)
+    const expect = { author: 'Edsger W. Dijkstra', likes: 17 }
+
+    assert.deepStrictEqual(result, expect)
+  })
+
+  test('when list has multiple blogs with same amount of posts, equals most recent author', () => {
+    const result = listHelper.mostLikes(testData.largeBlogList)
+    const expect = { author: 'Michael Chan', likes: 54 }
 
     assert.deepStrictEqual(result, expect)
   })

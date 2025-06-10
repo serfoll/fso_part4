@@ -23,21 +23,33 @@ const favoriteBlog = blogs => {
 const mostBlogs = blogs => {
   if (blogs.length === 0) return {}
 
-  const simpleSort = _.groupBy(blogs, 'author')
   const authWithMostBlogs = _.chain(blogs)
     .groupBy('author')
-    .map((value, key) => ({ author: key, blogs: value.length }))
+    .map((blog, key) => ({ author: key, blogs: blog.length }))
     .maxBy('blogs')
     .value()
 
-  logger.info('simple sort', simpleSort)
-  logger.info('grouped blogs', authWithMostBlogs)
+  // logger.info('grouped blogs', authWithMostBlogs)
   return authWithMostBlogs
+}
+
+const mostLikes = blogs => {
+  if (blogs.length === 0) return {}
+
+  const authorWithMostLikes = _.chain(blogs)
+    .groupBy('author')
+    .map((blog, key) => ({ author: key, likes: _.sumBy(blog, 'likes') }))
+    .maxBy('likes')
+    .value()
+
+  // logger.info('most likes:', authorWithMostLikes)
+  return authorWithMostLikes
 }
 
 module.exports = {
   dummy,
   favoriteBlog,
   mostBlogs,
+  mostLikes,
   totalLikes,
 }

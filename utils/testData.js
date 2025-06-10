@@ -42,7 +42,7 @@ const largeBlogList = [
     title: 'React patterns',
     author: 'Michael Chan',
     url: 'https://reactpatterns.com/',
-    likes: 7,
+    likes: 12,
     __v: 0,
   },
   {
@@ -50,7 +50,7 @@ const largeBlogList = [
     title: 'Go To Statement Considered Harmful',
     author: 'Edsger W. Dijkstra',
     url: 'http://www.u.arizona.edu/~rubinson/copyright_violations/Go_To_Considered_Harmful.html',
-    likes: 5,
+    likes: 0,
     __v: 0,
   },
   {
@@ -66,7 +66,7 @@ const largeBlogList = [
     title: 'First class tests',
     author: 'Robert C. Martin',
     url: 'http://blog.cleancoder.com/uncle-bob/2017/05/05/TestDefinitions.htmll',
-    likes: 10,
+    likes: 30,
     __v: 0,
   },
   {
@@ -74,7 +74,7 @@ const largeBlogList = [
     title: 'TDD harms architecture',
     author: 'Robert C. Martin',
     url: 'http://blog.cleancoder.com/uncle-bob/2017/03/03/TDD-Harms-Architecture.html',
-    likes: 0,
+    likes: 12,
     __v: 0,
   },
   {
@@ -85,7 +85,24 @@ const largeBlogList = [
     likes: 12,
     __v: 0,
   },
+  {
+    _id: '4a422a870c54a676234d17f7',
+    title: 'React Native Tips',
+    author: 'Michael Chan',
+    url: 'https://reactnativetips.com/react-native-design-patterns-best-practices/',
+    likes: 30,
+    __v: 0,
+  },
+  {
+    _id: '5a422a851b54a671234d17f7',
+    title: 'Chan talks',
+    author: 'Michael Chan',
+    url: 'https://chan.dev/talks/',
+    likes: 12,
+    __v: 0,
+  },
 ]
+
 module.exports = {
   singleBlog,
   multipleBlogs,
