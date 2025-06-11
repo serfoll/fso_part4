@@ -17,7 +17,7 @@ beforeEach(async () => {
   logger.info('clean up and save done')
 })
 
-describe('getting blogs', () => {
+describe('getting blog posts', () => {
   test('blogs are returned as JSON', async () => {
     await api
       .get('/api/blogs')
@@ -30,10 +30,30 @@ describe('getting blogs', () => {
     assert.strictEqual(response.body.length, testData.largeBlogList.length)
   })
 
-  test('blog id key should not be _id', { only: true }, async () => {
+  test('blog id key should not be _id', async () => {
     const response = await api.get('/api/blogs')
     const blogs = response.body
 
     assert.strictEqual(validateBlogsIdKey(blogs), false)
+  })
+})
+
+describe('saving blog posts', () => {
+  test('new blog post is saved to DB', { only: true }, async () => {
+    const odlBlogs = await api.get('/api/blogs')
+    const oldBlogsLength = odlBlogs.body.length
+
+    await api
+      .post('/api/blogs')
+      .send(testData.dummyBlogPost)
+      .expect(201)
+      .expect('Content-type', /application\/json/)
+
+    const currentBlogs = await api.get('/api/blogs')
+    const currentBlogsData = currentBlogs.body
+    assert.strictEqual(currentBlogsData.length, oldBlogsLength + 1)
+
+    const titles = currentBlogsData.map(b => b.title)
+    assert(titles.includes(testData.dummyBlogPost.title))
   })
 })

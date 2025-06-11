@@ -9,6 +9,13 @@ const singleBlog = [
   },
 ]
 
+const dummyBlogPost = {
+  title: 'Cursor on mobile is coming',
+  author: 'Ryo Lu',
+  url: 'https://x.com/ryolu_/status/1932103168743346211?s=46&t=9L7AsLwZ88tYxgl351Rs1A',
+  likes: 64,
+}
+
 const multipleBlogs = [
   {
     _id: '5a422a851b54a676234d17f7',
@@ -104,6 +111,7 @@ const largeBlogList = [
 ]
 
 module.exports = {
+  dummyBlogPost,
   singleBlog,
   multipleBlogs,
   largeBlogList,
