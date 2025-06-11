@@ -38,8 +38,25 @@ describe('getting blog posts', () => {
   })
 })
 
-describe('saving blog posts', () => {
-  test('new blog post is saved to DB', { only: true }, async () => {
+describe('saving blog post', () => {
+  test(
+    'new blog post without likes property, likes defaults to 0',
+    { only: true },
+    async () => {
+      const newPost = await api
+        .post('/api/blogs')
+        .send(testData.postWithNoLikesProp)
+        .expect(201)
+        .expect('Content-type', /application\/json/)
+
+      const newPostData = newPost.body
+      const hasLikes = 'likes' in newPostData && newPostData.likes === 0
+
+      assert.strictEqual(hasLikes, true)
+    }
+  )
+
+  test('new blog post is saved to DB', async () => {
     const odlBlogs = await api.get('/api/blogs')
     const oldBlogsLength = odlBlogs.body.length
 

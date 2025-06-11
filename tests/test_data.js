@@ -16,6 +16,12 @@ const dummyBlogPost = {
   likes: 64,
 }
 
+const postWithNoLikesProp = {
+  title: 'Tech Skills That Will Survive AI Automation',
+  author: 'Tiff In Tech',
+  url: 'https://www.youtube.com/watch?v=XsInbjsGrBM',
+}
+
 const multipleBlogs = [
   {
     _id: '5a422a851b54a676234d17f7',
@@ -114,5 +120,6 @@ module.exports = {
   dummyBlogPost,
   singleBlog,
   multipleBlogs,
+  postWithNoLikesProp,
   largeBlogList,
 }
