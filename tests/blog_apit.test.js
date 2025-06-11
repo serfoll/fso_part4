@@ -40,21 +40,28 @@ describe('getting blog posts', () => {
 
 describe('saving blog post', () => {
   test(
-    'new blog post without likes property, likes defaults to 0',
+    'new blog post without url or title, should return status 400',
     { only: true },
     async () => {
-      const newPost = await api
+      await api
         .post('/api/blogs')
-        .send(testData.postWithNoLikesProp)
-        .expect(201)
-        .expect('Content-type', /application\/json/)
-
-      const newPostData = newPost.body
-      const hasLikes = 'likes' in newPostData && newPostData.likes === 0
-
-      assert.strictEqual(hasLikes, true)
+        .send(testData.postWithNoUrlOrTitle)
+        .expect(400)
     }
   )
+
+  test('new blog post without likes property, likes defaults to 0', async () => {
+    const newPost = await api
+      .post('/api/blogs')
+      .send(testData.postWithNoLikesProp)
+      .expect(201)
+      .expect('Content-type', /application\/json/)
+
+    const newPostData = newPost.body
+    const hasLikes = 'likes' in newPostData && newPostData.likes === 0
+
+    assert.strictEqual(hasLikes, true)
+  })
 
   test('new blog post is saved to DB', async () => {
     const odlBlogs = await api.get('/api/blogs')

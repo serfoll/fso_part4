@@ -22,6 +22,10 @@ const postWithNoLikesProp = {
   url: 'https://www.youtube.com/watch?v=XsInbjsGrBM',
 }
 
+const postWithNoUrlOrTitle = {
+  author: 'Tiff In Tech',
+}
+
 const multipleBlogs = [
   {
     _id: '5a422a851b54a676234d17f7',
@@ -121,5 +125,6 @@ module.exports = {
   singleBlog,
   multipleBlogs,
   postWithNoLikesProp,
+  postWithNoUrlOrTitle,
   largeBlogList,
 }
