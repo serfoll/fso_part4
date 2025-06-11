@@ -1,7 +1,7 @@
 const { test, describe } = require('node:test')
 const assert = require('node:assert')
-const helper = require('../utils/test_helper')
-const testData = require('../utils/test_data')
+const helper = require('./test_helper')
+const testData = require('./test_data')
 
 describe('author with most posts', () => {
   test('when list is empty, equals empty object', () => {

@@ -1,4 +1,4 @@
-const logger = require('./logger')
+const logger = require('../utils/logger')
 const _ = require('lodash')
 
 const dummy = blogs => {
@@ -17,7 +17,9 @@ const totalLikes = blogs => {
 
 const favoriteBlog = blogs => {
   if (blogs.length === 0) return {}
-  const favorite = blogs.reduce((max, blog) => (max.likes < blog.likes ? blog : max))
+  const favorite = blogs.reduce((max, blog) =>
+    max.likes < blog.likes ? blog : max
+  )
   // logger.info('favorite blog:', favorite)
   return favorite
 }
