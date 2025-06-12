@@ -80,8 +80,8 @@ describe('blog posts validation', () => {
     })
   })
 
-  describe('delete a single post', () => {
-    test('delete single post, return 204', { only: true }, async () => {
+  describe('deleting post', () => {
+    test('delete a post, returns 204', async () => {
       const id = testData.singleBlog[0]._id
       const isValidId = dbHelpers.isValideObjectId(id)
 
@@ -92,6 +92,26 @@ describe('blog posts validation', () => {
       const currentIds = currentBlogs.map(b => b.id)
 
       assert.strictEqual(currentIds.includes(id), false)
+    })
+  })
+
+  describe('update post', () => {
+    test('updating a post, returns json', async () => {
+      const id = testData.postToUpdate.id
+      const isValidId = dbHelpers.isValideObjectId(id)
+
+      assert.strictEqual(isValidId, true)
+
+      await api
+        .put(`/api/blogs/${id}`)
+        .send({ likes: testData.postToUpdate.likes })
+        .expect(200)
+        .expect('Content-type', /application\/json/)
+
+      const updatePosts = (await api.get('/api/blogs')).body
+      const updatedPost = updatePosts.find(p => p.id === id)
+
+      assert.deepStrictEqual(updatedPost, testData.postToUpdate)
     })
   })
 })

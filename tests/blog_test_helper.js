@@ -1,4 +1,4 @@
-const { logger } = require('../utils')
+// const { logger } = require('../utils')
 
 const validateBlogsIdKey = blogs => {
   if (blogs.length === 0) return true
