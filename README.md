@@ -49,7 +49,7 @@ npm run dev
 ## Topics covered
 
 - Backend app structure
-- Backend Testing (unit tests)
+- Backend Testing (unit tests, API-level integration tests)
 - User administration
 - Token authentication
 
