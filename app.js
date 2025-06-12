@@ -9,19 +9,30 @@ const logger = require('./utils/logger')
 
 const app = express()
 
-morgan.token('reqData', function (req) {
-  if (req.method === 'POST') {
-    return JSON.stringify(req.body)
+morgan.token('reqData', request => {
+  if (request.method === 'POST') {
+    return JSON.stringify(request.body)
   }
   return ' '
 })
 
 logger.info(`Connecting to db ${config.MONGODB_URI}`)
 mongoose.connect(config.MONGODB_URI)
+logger.info(`Connected to db`)
 
 app.use(express.json())
 
-app.use(morgan(':method :url :status :res[content-length] - :response-time ms :reqData'))
+app.use(
+  morgan(
+    ':method :url :status :res[content-length] - :response-time ms :reqData'
+  )
+)
+
+app.use(
+  middleware.asyncHandler(async (request, response, next) => {
+    next()
+  })
+)
 
 app.use('/api/blogs', controllers.blogs)
 

@@ -9,6 +9,31 @@ const singleBlog = [
   },
 ]
 
+const dummyBlogPost = {
+  title: 'Cursor on mobile is coming',
+  author: 'Ryo Lu',
+  url: 'https://x.com/ryolu_/status/1932103168743346211?s=46&t=9L7AsLwZ88tYxgl351Rs1A',
+  likes: 64,
+}
+
+const postWithNoLikesProp = {
+  title: 'Tech Skills That Will Survive AI Automation',
+  author: 'Tiff In Tech',
+  url: 'https://www.youtube.com/watch?v=XsInbjsGrBM',
+}
+
+const postWithNoUrlOrTitle = {
+  author: 'Tiff In Tech',
+}
+
+const postToUpdate = {
+  id: '5a422aa71b54a676234d17f8',
+  title: 'Go To Statement Considered Harmful',
+  author: 'Edsger W. Dijkstra',
+  url: 'http://www.u.arizona.edu/~rubinson/copyright_violations/Go_To_Considered_Harmful.html',
+  likes: 30,
+}
+
 const multipleBlogs = [
   {
     _id: '5a422a851b54a676234d17f7',
@@ -104,7 +129,11 @@ const largeBlogList = [
 ]
 
 module.exports = {
+  dummyBlogPost,
   singleBlog,
   multipleBlogs,
+  postToUpdate,
+  postWithNoLikesProp,
+  postWithNoUrlOrTitle,
   largeBlogList,
 }
