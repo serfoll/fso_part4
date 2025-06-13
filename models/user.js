@@ -4,7 +4,7 @@ const userSchema = new mongoose.Schema({
   username: {
     required: true,
     type: String,
-    minLength: 3,
+    minLength: 5,
     unique: true,
   },
   name: {
@@ -32,6 +32,6 @@ userSchema.set('toJSON', {
   },
 })
 
-const user = new mongoose.model('User', userSchema)
+const User = new mongoose.model('User', userSchema)
 
-module.exports = user
+module.exports = User

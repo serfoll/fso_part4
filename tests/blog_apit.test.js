@@ -83,7 +83,7 @@ describe('blog posts validation', () => {
   describe('deleting post', () => {
     test('delete a post, returns 204', async () => {
       const id = testData.singleBlog[0]._id
-      const isValidId = dbHelpers.isValideObjectId(id)
+      const isValidId = dbHelpers.isValidObjectId(id)
 
       assert.strictEqual(isValidId, true)
 
@@ -98,7 +98,7 @@ describe('blog posts validation', () => {
   describe('update post', () => {
     test('updating a post, returns json', async () => {
       const id = testData.postToUpdate.id
-      const isValidId = dbHelpers.isValideObjectId(id)
+      const isValidId = dbHelpers.isValidObjectId(id)
 
       assert.strictEqual(isValidId, true)
 

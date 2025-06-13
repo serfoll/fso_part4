@@ -10,7 +10,7 @@ const logger = require('./utils/logger')
 const app = express()
 
 morgan.token('reqData', request => {
-  if (request.method === 'POST') {
+  if (request.method === 'POST' && process.env.NODE_ENV !== 'production') {
     return JSON.stringify(request.body)
   }
   return ' '
