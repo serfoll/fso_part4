@@ -35,6 +35,7 @@ app.use(
 )
 
 app.use('/api/blogs', controllers.blogs)
+app.use('/api/users', controllers.users)
 
 app.use(middleware.unknownEndpoint)
 app.use(middleware.errorHandler)
