@@ -130,10 +130,10 @@ const largeBlogList = [
 
 module.exports = {
   dummyBlogPost,
-  singleBlog,
+  largeBlogList,
   multipleBlogs,
   postToUpdate,
   postWithNoLikesProp,
   postWithNoUrlOrTitle,
-  largeBlogList,
+  singleBlog,
 }
