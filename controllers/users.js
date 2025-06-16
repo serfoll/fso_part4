@@ -8,6 +8,20 @@ usersRouter.get('/', async (request, response) => {
   response.json(users)
 })
 
+usersRouter.get('/:id', async (request, response) => {
+  const { id } = request.params
+  const user = await User.findById(id)
+
+  if (!user || user === null) {
+    middleware.errorLogger({
+      msg: 'userId missing or is invalid',
+      name: 'InvalidUserId',
+    })
+  }
+
+  response.json(user)
+})
+
 usersRouter.post(
   '/',
   asyncHandler(async (request, response) => {
