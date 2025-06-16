@@ -2,6 +2,7 @@ const { test, describe, beforeEach, after } = require('node:test')
 const assert = require('node:assert')
 const supertest = require('supertest')
 const app = require('../app')
+const _ = require('lodash')
 
 const { logger, dbHelpers } = require('../utils')
 const Blog = require('../models/blog')
@@ -19,7 +20,7 @@ describe('blog posts validation', () => {
     logger.info('clean up and save done')
   })
 
-  describe.only('getting blog posts', () => {
+  describe('getting blog posts', () => {
     test('blogs are returned as JSON', async () => {
       const result = await api
         .get('/api/blogs')
@@ -27,9 +28,10 @@ describe('blog posts validation', () => {
         .expect('Content-type', /application\/json/)
 
       const resultBody = result.body
-      const users = resultBody.map(b => b?.user)
-      logger.info(users)
-      assert.strictEqual(result.body.length, testData.largeBlogList.length)
+      assert.strictEqual(resultBody.length, testData.largeBlogList.length)
+
+      const hasUserKey = _.chain(resultBody).findKey('user').isString().value()
+      assert.strictEqual(hasUserKey, true)
     })
 
     test('all blogs are returned', async () => {
@@ -40,17 +42,36 @@ describe('blog posts validation', () => {
     test('blog id key should not be _id', async () => {
       const response = await api.get('/api/blogs')
       const blogs = response.body
-
       assert.strictEqual(validateBlogsIdKey(blogs), false)
+      const isInvalidIdKey = _.chain(blogs).findKey('_id').isString().value()
+      assert.strictEqual(isInvalidIdKey, false)
     })
   })
 
   describe('saving a new blog post', () => {
-    test('new blog post without url or title, should return status 400', async () => {
-      await api
+    test.only('new blog post without user, returns proper status code and message', async () => {
+      const response = await await api
+        .post('/api/blogs')
+        .send(testData.postWithNoUserId)
+        .expect(400)
+
+      assert.strictEqual(
+        response.body.error.includes('userId missing or is invalid'),
+        true
+      )
+    })
+
+    test('new blog post without url or title, should returns proper status code and message', async () => {
+      const result = await api
         .post('/api/blogs')
         .send(testData.postWithNoUrlOrTitle)
         .expect(400)
+
+      assert.strictEqual(
+        result.body.error.includes('url: Path `url` is required.') ||
+          result.body.error.includes('title: Path `title` is required.'),
+        true
+      )
     })
 
     test('new blog post without likes property, likes defaults to 0', async () => {
@@ -62,7 +83,6 @@ describe('blog posts validation', () => {
 
       const newPostData = newPost.body
       const hasLikes = 'likes' in newPostData && newPostData.likes === 0
-
       assert.strictEqual(hasLikes, true)
     })
 
@@ -110,7 +130,7 @@ describe('blog posts validation', () => {
   })
 
   describe('update post', () => {
-    test('updating a post, returns json', async () => {
+    test('updating likes on a post, saves to db and returns proper data', async () => {
       const id = testData.postToUpdate.id
       const isValidId = dbHelpers.isValidObjectId(id)
 

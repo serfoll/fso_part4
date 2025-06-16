@@ -19,9 +19,15 @@ const postWithNoLikesProp = {
   title: 'Tech Skills That Will Survive AI Automation',
   author: 'Tiff In Tech',
   url: 'https://www.youtube.com/watch?v=XsInbjsGrBM',
+  userId: '684c9a518cd40d0378fbaefd',
 }
 
 const postWithNoUrlOrTitle = {
+  author: 'Tiff In Tech',
+  userId: '684f6203f4010ed6748adda8',
+}
+
+const postWithNoUserId = {
   author: 'Tiff In Tech',
 }
 
@@ -31,6 +37,11 @@ const postToUpdate = {
   author: 'Edsger W. Dijkstra',
   url: 'http://www.u.arizona.edu/~rubinson/copyright_violations/Go_To_Considered_Harmful.html',
   likes: 30,
+  user: {
+    id: '684c9a518cd40d0378fbaefd',
+    name: 'Ivy',
+    username: 'ivylow',
+  },
 }
 
 const multipleBlogs = [
@@ -68,7 +79,7 @@ const largeBlogList = [
     author: 'Edsger W. Dijkstra',
     url: 'http://www.cs.utexas.edu/~EWD/transcriptions/EWD08xx/EWD808.html',
     likes: 12,
-    user: '684c9a518cd40d0378fbaf01',
+    user: '684f6203f4010ed6748adda8',
     __v: 0,
   },
   {
@@ -77,7 +88,7 @@ const largeBlogList = [
     author: 'Robert C. Martin',
     url: 'http://blog.cleancoder.com/uncle-bob/2017/05/05/TestDefinitions.htmll',
     likes: 30,
-    user: '684c9a518cd40d0378fbaf01',
+    user: '684f6203f4010ed6748adda8',
     __v: 0,
   },
   {
@@ -86,7 +97,7 @@ const largeBlogList = [
     author: 'Robert C. Martin',
     url: 'http://blog.cleancoder.com/uncle-bob/2017/03/03/TDD-Harms-Architecture.html',
     likes: 12,
-    user: '684c9a518cd40d0378fbaeff',
+    user: '684f6203f4010ed6748adda8',
     __v: 0,
   },
   {
@@ -95,7 +106,7 @@ const largeBlogList = [
     author: 'Robert C. Martin',
     url: 'http://blog.cleancoder.com/uncle-bob/2016/05/01/TypeWars.html',
     likes: 12,
-    user: '684c9a518cd40d0378fbaeff',
+    user: '684f6203f4010ed6748addaa',
     __v: 0,
   },
   {
@@ -104,7 +115,7 @@ const largeBlogList = [
     author: 'Michael Chan',
     url: 'https://reactnativetips.com/react-native-design-patterns-best-practices/',
     likes: 30,
-    user: '684c9a518cd40d0378fbaefd',
+    user: '684f6203f4010ed6748addaa',
     __v: 0,
   },
   {
@@ -113,7 +124,7 @@ const largeBlogList = [
     author: 'Michael Chan',
     url: 'https://chan.dev/talks/',
     likes: 12,
-    user: '684c9a518cd40d0378fbaeff',
+    user: '684f6203f4010ed6748addaa',
     __v: 0,
   },
 ]
@@ -125,5 +136,6 @@ module.exports = {
   postToUpdate,
   postWithNoLikesProp,
   postWithNoUrlOrTitle,
+  postWithNoUserId,
   singleBlog,
 }

@@ -8,17 +8,21 @@ const testUsers = [
     __v: 0,
   },
   {
+    _id: '684f6203f4010ed6748adda8',
     username: 'livley',
     name: 'Lively',
     password: '-l!v3Ly-',
     blogs: [],
+    __v: 0,
   },
 
   {
+    _id: '684f6203f4010ed6748addaa',
     username: 'harry3',
     name: 'Harry',
     password: 'n3wP4ss?',
     blogs: [],
+    __v: 0,
   },
 ]
 
