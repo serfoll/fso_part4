@@ -19,12 +19,17 @@ describe('blog posts validation', () => {
     logger.info('clean up and save done')
   })
 
-  describe('getting blog posts', () => {
+  describe.only('getting blog posts', () => {
     test('blogs are returned as JSON', async () => {
-      await api
+      const result = await api
         .get('/api/blogs')
         .expect(200)
         .expect('Content-type', /application\/json/)
+
+      const resultBody = result.body
+      const users = resultBody.map(b => b?.user)
+      logger.info(users)
+      assert.strictEqual(result.body.length, testData.largeBlogList.length)
     })
 
     test('all blogs are returned', async () => {
@@ -65,24 +70,33 @@ describe('blog posts validation', () => {
       const odlBlogs = await api.get('/api/blogs')
       const oldBlogsLength = odlBlogs.body.length
 
-      await api
+      const savedBlog = await api
         .post('/api/blogs')
-        .send(testData.dummyBlogPost)
+        .send(testData.singleBlog)
         .expect(201)
         .expect('Content-type', /application\/json/)
+
+      assert.strictEqual(savedBlog.body.user, testData.singleBlog.userId)
 
       const currentBlogs = await api.get('/api/blogs')
       const currentBlogsData = currentBlogs.body
       assert.strictEqual(currentBlogsData.length, oldBlogsLength + 1)
 
-      const titles = currentBlogsData.map(b => b.title)
-      assert(titles.includes(testData.dummyBlogPost.title))
+      const blogTitles = currentBlogsData.map(blog => blog.title)
+      assert(blogTitles.includes(testData.singleBlog.title))
+
+      const blogUsers = currentBlogsData.map(blog => blog?.user?.id)
+      assert.strictEqual(blogUsers.includes(testData.singleBlog.userId), true)
+
+      const userInDb = await api.get(`/api/users/${testData.singleBlog.userId}`)
+      const userInDbBlogs = userInDb.body.blogs
+      assert.strictEqual(userInDbBlogs.includes(testData.singleBlog._id), true)
     })
   })
 
   describe('deleting post', () => {
     test('delete a post, returns 204', async () => {
-      const id = testData.singleBlog[0]._id
+      const id = testData.singleBlog._id
       const isValidId = dbHelpers.isValidObjectId(id)
 
       assert.strictEqual(isValidId, true)

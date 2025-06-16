@@ -1,13 +1,12 @@
-const singleBlog = [
-  {
-    _id: '5a422a851b54a676234d17f7',
-    title: 'React patterns',
-    author: 'Michael Chan',
-    url: 'https://reactpatterns.com/',
-    likes: 7,
-    __v: 0,
-  },
-]
+const singleBlog = {
+  _id: '5a422a851b54a676234d17f7',
+  title: 'React patterns',
+  author: 'Michael Chan',
+  url: 'https://reactpatterns.com/',
+  likes: 7,
+  userId: '684c9a518cd40d0378fbaefd',
+  __v: 0,
+}
 
 const dummyBlogPost = {
   title: 'Cursor on mobile is coming',
@@ -36,14 +35,6 @@ const postToUpdate = {
 
 const multipleBlogs = [
   {
-    _id: '5a422a851b54a676234d17f7',
-    title: 'React patterns',
-    author: 'Michael Chan',
-    url: 'https://reactpatterns.com/',
-    likes: 7,
-    __v: 0,
-  },
-  {
     _id: '5a422aa71b54a676234d17f8',
     title: 'Go To Statement Considered Harmful',
     author: 'Edsger W. Dijkstra',
@@ -63,19 +54,12 @@ const multipleBlogs = [
 
 const largeBlogList = [
   {
-    _id: '5a422a851b54a676234d17f7',
-    title: 'React patterns',
-    author: 'Michael Chan',
-    url: 'https://reactpatterns.com/',
-    likes: 12,
-    __v: 0,
-  },
-  {
     _id: '5a422aa71b54a676234d17f8',
     title: 'Go To Statement Considered Harmful',
     author: 'Edsger W. Dijkstra',
     url: 'http://www.u.arizona.edu/~rubinson/copyright_violations/Go_To_Considered_Harmful.html',
     likes: 0,
+    user: '684c9a518cd40d0378fbaefd',
     __v: 0,
   },
   {
@@ -84,6 +68,7 @@ const largeBlogList = [
     author: 'Edsger W. Dijkstra',
     url: 'http://www.cs.utexas.edu/~EWD/transcriptions/EWD08xx/EWD808.html',
     likes: 12,
+    user: '684c9a518cd40d0378fbaf01',
     __v: 0,
   },
   {
@@ -92,6 +77,7 @@ const largeBlogList = [
     author: 'Robert C. Martin',
     url: 'http://blog.cleancoder.com/uncle-bob/2017/05/05/TestDefinitions.htmll',
     likes: 30,
+    user: '684c9a518cd40d0378fbaf01',
     __v: 0,
   },
   {
@@ -100,6 +86,7 @@ const largeBlogList = [
     author: 'Robert C. Martin',
     url: 'http://blog.cleancoder.com/uncle-bob/2017/03/03/TDD-Harms-Architecture.html',
     likes: 12,
+    user: '684c9a518cd40d0378fbaeff',
     __v: 0,
   },
   {
@@ -108,6 +95,7 @@ const largeBlogList = [
     author: 'Robert C. Martin',
     url: 'http://blog.cleancoder.com/uncle-bob/2016/05/01/TypeWars.html',
     likes: 12,
+    user: '684c9a518cd40d0378fbaeff',
     __v: 0,
   },
   {
@@ -116,6 +104,7 @@ const largeBlogList = [
     author: 'Michael Chan',
     url: 'https://reactnativetips.com/react-native-design-patterns-best-practices/',
     likes: 30,
+    user: '684c9a518cd40d0378fbaefd',
     __v: 0,
   },
   {
@@ -124,6 +113,7 @@ const largeBlogList = [
     author: 'Michael Chan',
     url: 'https://chan.dev/talks/',
     likes: 12,
+    user: '684c9a518cd40d0378fbaeff',
     __v: 0,
   },
 ]

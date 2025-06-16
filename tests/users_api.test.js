@@ -27,13 +27,43 @@ describe('users api validation', () => {
   })
 
   describe('get user', () => {
-    test('get current users', async () => {
+    test.only('get current users', async () => {
       const result = await api
         .get('/api/users')
         .expect(200)
         .expect('Content-type', /application\/json/)
 
+      logger.info(result.body)
+
       assert.strictEqual(result.body.length, testData.testUsers.length)
+    })
+
+    test('get single user with valid id, returns user', async () => {
+      const result = await api
+        .get(`/api/users/${testData.testUsers[0]._id}`)
+        .expect(200)
+        .expect('Content-type', /application\/json/)
+
+      const testUser = { ...testData.testUsers[0] }
+      testUser.id = testData.testUsers[0]._id
+      delete testUser._id
+      delete testUser.__v
+      delete testUser.password
+
+      logger.info(testUser)
+      assert.deepStrictEqual(result.body, testUser)
+    })
+
+    test('get single user with invalid id, returns proper status and mesage', async () => {
+      const result = await api
+        .get(`/api/users/5a422aa71b54a676234d17f8`)
+        .expect(400)
+        .expect('Content-type', /application\/json/)
+
+      assert.strictEqual(
+        result.body.error.includes('userId missing or is invalid'),
+        true
+      )
     })
   })
 

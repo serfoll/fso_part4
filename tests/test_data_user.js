@@ -3,17 +3,22 @@ const testUsers = [
     username: 'ivylow',
     name: 'Ivy',
     password: 'ivy4_pAss',
+    blogs: [],
+    _id: '684c9a518cd40d0378fbaefd',
+    __v: 0,
   },
   {
     username: 'livley',
     name: 'Lively',
     password: '-l!v3Ly-',
+    blogs: [],
   },
 
   {
     username: 'harry3',
     name: 'Harry',
     password: 'n3wP4ss?',
+    blogs: [],
   },
 ]
 
