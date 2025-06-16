@@ -2,6 +2,7 @@ const { asyncHandler } = require('../utils/middleware')
 const blogsRouter = require('express').Router()
 const Blog = require('../models/blog')
 const User = require('../models/user')
+// const { logger } = require('../utils')
 
 blogsRouter.get(
   '/',
@@ -21,7 +22,7 @@ blogsRouter.post(
     const body = request.body
     const user = await User.findById(body.userId)
 
-    if (!user) {
+    if (!user || user === null) {
       return response
         .status(400)
         .json({ error: 'userId missing or is invalid' })
