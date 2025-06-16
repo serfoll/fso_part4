@@ -2,11 +2,13 @@ const { test, describe, beforeEach, after } = require('node:test')
 const assert = require('node:assert')
 const supertest = require('supertest')
 const app = require('../app')
+const _ = require('lodash')
 
 const { logger, dbHelpers } = require('../utils')
 const testData = require('./test_data_user')
 const mongoose = require('mongoose')
 const User = require('../models/user')
+const { validateBlogsIdKey } = require('./test_helper')
 
 const api = supertest(app)
 
@@ -27,15 +29,26 @@ describe('users api validation', () => {
   })
 
   describe('get user', () => {
-    test.only('get current users', async () => {
+    test('get current users', async () => {
       const result = await api
         .get('/api/users')
         .expect(200)
         .expect('Content-type', /application\/json/)
 
-      logger.info(result.body)
+      const resultBody = result.body
+      assert.strictEqual(resultBody.length, testData.testUsers.length)
 
-      assert.strictEqual(result.body.length, testData.testUsers.length)
+      const allHaveBlogsKey = _.every(resultBody, user => _.has(user, 'blogs'))
+      assert.strictEqual(allHaveBlogsKey, true)
+    })
+
+    test.only('user id key should not be _id', async () => {
+      const result = await api.get('/api/users')
+      const users = result.body
+      assert.strictEqual(validateBlogsIdKey(users), false)
+
+      const hasNoInvalidIdKey = !_.every(users, user => _.has(user, '_id'))
+      assert.strictEqual(hasNoInvalidIdKey, true)
     })
 
     test('get single user with valid id, returns user', async () => {
@@ -50,8 +63,9 @@ describe('users api validation', () => {
       delete testUser.__v
       delete testUser.password
 
-      logger.info(testUser)
       assert.deepStrictEqual(result.body, testUser)
+      const hasBlogsKey = _.has(result.body, 'blogs')
+      assert.deepStrictEqual(hasBlogsKey, true)
     })
 
     test('get single user with invalid id, returns proper status and mesage', async () => {

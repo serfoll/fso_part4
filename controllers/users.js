@@ -1,7 +1,7 @@
 const { asyncHandler } = require('../utils/middleware')
 const usersRouter = require('express').Router()
 const User = require('../models/user')
-const { dbHelpers, middleware, logger } = require('../utils')
+const { dbHelpers, middleware } = require('../utils')
 
 usersRouter.get('/', async (request, response) => {
   const users = await User.find({})

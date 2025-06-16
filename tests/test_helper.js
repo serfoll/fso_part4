@@ -50,10 +50,18 @@ const mostLikes = blogs => {
   return authorWithMostLikes
 }
 
+const validateBlogsIdKey = blogs => {
+  if (blogs.length === 0) return true
+  const isValidIdKey = blogs.some(blog => '_id' in blog)
+  // logger.info('isvalid:', isValidIdKey)
+  return isValidIdKey
+}
+
 module.exports = {
   dummy,
   favoriteBlog,
   mostBlogs,
   mostLikes,
   totalLikes,
+  validateBlogsIdKey,
 }

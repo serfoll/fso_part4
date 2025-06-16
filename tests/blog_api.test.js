@@ -7,7 +7,7 @@ const _ = require('lodash')
 const { logger, dbHelpers } = require('../utils')
 const Blog = require('../models/blog')
 const testData = require('./test_data')
-const { validateBlogsIdKey } = require('./blog_test_helper')
+const { validateBlogsIdKey } = require('./test_helper')
 const mongoose = require('mongoose')
 
 const api = supertest(app)
@@ -43,13 +43,14 @@ describe('blog posts validation', () => {
       const response = await api.get('/api/blogs')
       const blogs = response.body
       assert.strictEqual(validateBlogsIdKey(blogs), false)
-      const isInvalidIdKey = _.chain(blogs).findKey('_id').isString().value()
-      assert.strictEqual(isInvalidIdKey, false)
+
+      const hasNoInvalidIdKey = !_.every(blogs, blog => _.has(blog, '_id'))
+      assert.strictEqual(hasNoInvalidIdKey, true)
     })
   })
 
   describe('saving a new blog post', () => {
-    test.only('new blog post without user, returns proper status code and message', async () => {
+    test('new blog post without user, returns proper status code and message', async () => {
       const response = await await api
         .post('/api/blogs')
         .send(testData.postWithNoUserId)

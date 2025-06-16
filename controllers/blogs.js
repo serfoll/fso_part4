@@ -2,7 +2,7 @@ const { asyncHandler } = require('../utils/middleware')
 const blogsRouter = require('express').Router()
 const Blog = require('../models/blog')
 const User = require('../models/user')
-const { logger } = require('../utils')
+// const { logger } = require('../utils')
 
 blogsRouter.get(
   '/',
