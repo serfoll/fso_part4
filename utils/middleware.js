@@ -24,7 +24,16 @@ const errorHandler = (error, request, response, next) => {
       .json({ error: 'expected `username` to be unique' })
   } else if (error.name === 'InvalidUserId') {
     return response.status(400).json({ error: error.message })
+  } else if (error.name === 'InvalidCredentials') {
+    return response.status(401).json({ error: error.message })
+  } else if (error.name === 'MissingUsername') {
+    return response.status(400).json({ error: error.message })
+  } else if (error.name === 'MissingPassword') {
+    return response.status(400).json({ error: error.message })
+  } else if (error.name === 'MissingUser') {
+    return response.status(404).json({ error: error.message })
   }
+
   next(error)
 }
 
