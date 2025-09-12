@@ -29,7 +29,7 @@ describe('users api validation', () => {
   })
 
   describe('get user', () => {
-    test('get current users', async () => {
+    test.only('get all users', async () => {
       const result = await api
         .get('/api/users')
         .expect(200)
@@ -42,7 +42,7 @@ describe('users api validation', () => {
       assert.strictEqual(allHaveBlogsKey, true)
     })
 
-    test.only('user id key should not be _id', async () => {
+    test('user id key should not be _id', async () => {
       const result = await api.get('/api/users')
       const users = result.body
       assert.strictEqual(validateBlogsIdKey(users), false)

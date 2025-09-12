@@ -34,7 +34,7 @@ describe('blog posts validation', () => {
       assert.strictEqual(hasUserKey, true)
     })
 
-    test('all blogs are returned', async () => {
+    test.only('all blogs are returned', async () => {
       const response = await api.get('/api/blogs')
       assert.strictEqual(response.body.length, testData.largeBlogList.length)
     })
@@ -51,7 +51,7 @@ describe('blog posts validation', () => {
 
   describe('saving a new blog post', () => {
     test('new blog post without user, returns proper status code and message', async () => {
-      const response = await await api
+      const response = await api
         .post('/api/blogs')
         .send(testData.postWithNoUserId)
         .expect(400)
