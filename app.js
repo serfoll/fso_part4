@@ -34,6 +34,7 @@ app.use(
   })
 )
 
+app.use('/', controllers.root)
 app.use('/api/blogs', controllers.blogs)
 app.use('/api/users', controllers.users)
 app.use('/api/login', controllers.login)

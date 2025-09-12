@@ -32,6 +32,8 @@ const errorHandler = (error, request, response, next) => {
     return response.status(400).json({ error: error.message })
   } else if (error.name === 'MissingUser') {
     return response.status(404).json({ error: error.message })
+  } else if (error.name === 'ServerDown') {
+    return response.status(503).json({ error: error.message })
   }
 
   next(error)
